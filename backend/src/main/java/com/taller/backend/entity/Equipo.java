@@ -1,7 +1,10 @@
 package com.taller.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 // Importaciones de JPA para mapear la entidad
 import jakarta.persistence.*;
+import java.util.List;
 
 /*
  * @Entity indica que esta clase se convertirá en una tabla
@@ -26,8 +29,7 @@ public class Equipo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-     /*
+    /*
      * Tipo de vehiculo.
      * Ej: Moto, Patineta, Bicicleta.
      */
@@ -37,7 +39,7 @@ public class Equipo {
      * Ej: Xiaomi, Segway, Kugoo.
      */
     private String marca;
-     /*
+    /*
      * Modelo de la patineta.
      * Ej: pro, es2, es3.
      */
@@ -71,6 +73,11 @@ public class Equipo {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
+
+    @OneToMany(mappedBy = "equipo")
+    @JsonIgnore
+    private List<OrdenServicio> ordenes;
+
     // Getters y Setters
 
     public Long getId() {
@@ -84,6 +91,7 @@ public class Equipo {
     public void setVehiculo(String tipoVehiculo) {
         this.tipoVehiculo = tipoVehiculo;
     }
+
     public String getMarca() {
         return marca;
     }
