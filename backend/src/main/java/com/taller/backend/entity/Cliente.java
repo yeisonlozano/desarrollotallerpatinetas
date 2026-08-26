@@ -38,7 +38,11 @@ public class Cliente {
      * Nombre completo del cliente.
      */
     private String nombre;
-
+    /*
+     * Teléfono de contacto.
+     */
+    @Column(unique = true)
+    private String cedula;
     /*
      * Teléfono de contacto.
      */
@@ -48,7 +52,10 @@ public class Cliente {
      * Dirección del cliente.
      */
     private String direccion;
-
+    /*
+     * Dirección del cliente.
+     */
+    private String correo;
     /*
      * Un cliente puede tener varios equipos.
      */

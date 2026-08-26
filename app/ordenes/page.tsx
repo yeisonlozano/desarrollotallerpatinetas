@@ -1,7 +1,9 @@
 export default function OrdenesPage() {
   return (
     <div>
-      <h1>Órdenes de Servicio</h1>
+      <h1 className="text-3xl font-bold">
+        Órdenes de Servicio
+      </h1>
     </div>
   );
 }
