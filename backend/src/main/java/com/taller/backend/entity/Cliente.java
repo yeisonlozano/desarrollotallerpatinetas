@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /*
  * @Entity indica que esta clase representa una tabla en la base de datos.
@@ -59,13 +59,15 @@ public class Cliente {
     /*
      * Un cliente puede tener varios equipos.
      */
+    /*
+     * Equipos asociados al cliente.
+     */
     @OneToMany(mappedBy = "cliente")
 
     /*
-     * Evita ciclos infinitos al convertir objetos a JSON.
+     * Permite mostrar los equipos
+     * cuando consultamos clientes.
      */
-
-    @JsonIgnore
-
+    @JsonManagedReference
     private List<Equipo> equipos;
 }

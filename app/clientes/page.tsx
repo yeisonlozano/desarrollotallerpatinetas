@@ -48,26 +48,25 @@ export default async function ClientesPage() {
       {/* Contenedor de las tarjetas */}
       <div className="space-y-4">
         <div className="mb-6">
-              <Link
-                href="/clientes/nuevo"
-                className="
+          <Link
+            href="/clientes/nuevo"
+            className="
                bg-green-600
                text-white
                 px-4
                 py-2
                 rounded
               "
-              >
-                Nuevo Cliente
-              </Link>
-            </div>
+          >
+            Nuevo Cliente
+          </Link>
+        </div>
         {/*
          * Recorremos cada cliente recibido
          * desde Spring Boot.
          */}
         {clientes.map((cliente: any) => (
           <div key={cliente.id} className="bg-white rounded shadow p-4">
-        
             {/* Nombre del cliente */}
             <h2 className="font-bold text-xl text-slate-800">
               {cliente.nombre}
@@ -78,10 +77,59 @@ export default async function ClientesPage() {
 
             {/* Dirección */}
             <p className="text-gray-600">{cliente.direccion}</p>
-             {/* Cédula */}
+            {/* Cédula */}
             <p className="text-gray-600">{cliente.cedula}</p>
             {/* Correo */}
             <p className="text-gray-600">{cliente.correo}</p>
+            {/* Botón Nuevo Equipo */}
+
+            <div className="mt-4">
+              <Link
+                href={`/clientes/${cliente.id}/nuevo-equipo`}
+                className="
+                bg-green-600
+                text-white
+                px-4
+                py-2
+                rounded
+              "
+              >
+                Nuevo Equipo
+              </Link>
+            </div>
+
+            {/* Sección de equipos */}
+            <div className="mt-4">
+              <h3 className="font-semibold text-slate-700">
+                Equipos Registrados
+              </h3>
+
+              {cliente.equipos?.length > 0 ? (
+                <div className="mt-2 space-y-2">
+                  {cliente.equipos.map((equipo: any) => (
+                    <div
+                      key={equipo.id}
+                      className="
+                      border
+                      rounded
+                      p-2
+                    bg-slate-50
+                      "
+                    >
+                      <div className="font-medium">
+                        {equipo.marca} - {equipo.modelo}
+                      </div>
+
+                      <div className="text-sm text-gray-600">
+                        Serie: {equipo.numeroSerie}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-500 mt-2">Sin equipos registrados</p>
+              )}
+            </div>
           </div>
         ))}
       </div>

@@ -1,5 +1,6 @@
 package com.taller.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 // Importaciones de JPA para mapear la entidad
@@ -47,6 +48,7 @@ public class Equipo {
     /*
      * Número de serie del equipo.
      */
+    @Column(unique = true)
     private String numeroSerie;
     /*
      * Color de la patineta.
@@ -66,13 +68,13 @@ public class Equipo {
      * a un único cliente.
      */
     @ManyToOne
+    @JoinColumn(name = "cliente_id")
 
     /*
-     * Nombre de la columna FK.
+     * Evita ciclos infinitos.
      */
-    @JoinColumn(name = "cliente_id")
+    @JsonBackReference
     private Cliente cliente;
-
 
     @OneToMany(mappedBy = "equipo")
     @JsonIgnore
