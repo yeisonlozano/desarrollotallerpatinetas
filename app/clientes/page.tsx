@@ -103,26 +103,26 @@ export default async function ClientesPage() {
               <h3 className="font-semibold text-slate-700">
                 Equipos Registrados
               </h3>
-
               {cliente.equipos?.length > 0 ? (
                 <div className="mt-2 space-y-2">
                   {cliente.equipos.map((equipo: any) => (
-                    <div
+                      <div
                       key={equipo.id}
                       className="
                       border
                       rounded
                       p-2
-                    bg-slate-50
-                      "
+                      bg-slate-50
+                      hover:bg-slate-100
+                      cursor-pointer
+                    "
                     >
-                      <div className="font-medium">
-                        {equipo.marca} - {equipo.modelo}
-                      </div>
-
-                      <div className="text-sm text-gray-600">
-                        Serie: {equipo.numeroSerie}
-                      </div>
+                      <Link
+                        href={`/equipos/${equipo.id}`}
+                        className="font-medium"
+                      >
+                        {equipo.tipoVehiculo} {equipo.marca} serie:{equipo.numeroSerie}
+                      </Link> 
                     </div>
                   ))}
                 </div>
