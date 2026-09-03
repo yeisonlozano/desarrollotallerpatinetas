@@ -5,7 +5,7 @@ import com.taller.backend.repository.ClienteRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:3000")
+
 
 /*
  * Indica que esta clase expone endpoints REST.
