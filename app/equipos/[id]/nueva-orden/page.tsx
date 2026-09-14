@@ -4,20 +4,16 @@
  * Hooks de React.
  */
 import { useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 /*
  * Página para registrar órdenes.
  */
 export default function NuevaOrdenPage() {
   /*
-   * Número de orden.
-   *
-   * Temporalmente fijo.
-   * Luego lo generaremos automáticamente.
+   * Navegación de Next.js.
    */
-  const [numeroOrden, setNumeroOrden] = useState("ORD-0001");
-
+  const router = useRouter();
   /*
    * Fecha de ingreso.
    */
@@ -49,7 +45,6 @@ export default function NuevaOrdenPage() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        numeroOrden,
         fechaIngreso,
         problemaReportado,
         condicionesAlRecibir,
@@ -60,14 +55,13 @@ export default function NuevaOrdenPage() {
     });
     if (response.ok) {
       alert("Orden registrada correctamente");
+
       /*
-       * Limpia el formulario.
+       * Regresa al detalle del equipo.
        */
-      setFechaIngreso("");
-      setProblemaReportado("");
-      setCondicionesAlRecibir("");
+      router.push(`/equipos/${equipoId}`);
     } else {
-      alert("Error al registrar la orden");
+      alert("Error al*registrar la orden");
     }
   }
 
@@ -76,22 +70,6 @@ export default function NuevaOrdenPage() {
       <h1 className="text-3xl font-bold mb-6">Nueva Orden de Servicio</h1>
 
       <div className="bg-white p-6 rounded shadow max-w-xl">
-        <div className="mb-4">
-          <label className="block mb-2">Número Orden</label>
-
-          <input
-            value={numeroOrden}
-            readOnly
-            className="
-              border
-              w-full
-              p-2
-              rounded
-              bg-gray-100
-            "
-          />
-        </div>
-
         <div className="mb-4">
           <label className="block mb-2">Fecha Ingreso</label>
 

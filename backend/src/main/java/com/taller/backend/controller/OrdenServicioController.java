@@ -37,6 +37,16 @@ public class OrdenServicioController {
     public OrdenServicio crear(
             @RequestBody OrdenServicio orden) {
 
-        return ordenRepository.save(orden);
+        long consecutivo = ordenRepository.count() + 1;
+
+        String numeroOrden = String.format(
+                "ORD-%06d",
+                consecutivo);
+
+        orden.setNumeroOrden(
+                numeroOrden);
+
+        return ordenRepository.save(
+                orden);
     }
 }
